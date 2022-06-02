@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import axios from "axios";
 import bearerAuthPlugin from "@fastify/bearer-auth";
+import corsPlugin from "@fastify/cors";
 import { parseCsv } from "./parse-csv";
 import { config } from "./config";
 
@@ -12,6 +13,7 @@ const GSHEET_URL = config.gsheetUrl();
 export function build(config) {
   const app = fastify(config);
 
+  app.register(corsPlugin);
   if (API_KEYS.size) {
     app.register(bearerAuthPlugin, { keys: API_KEYS });
   }
