@@ -5,13 +5,16 @@ import { parseCsv } from "./parse-csv";
 import { config } from "./config";
 
 const API_PATH = config.apiPath();
-const API_KEYS = new Set([config.apiKey()]);
+const API_KEY = config.apiKey();
+const API_KEYS = new Set(API_KEY ? [API_KEY] : []);
 const GSHEET_URL = config.gsheetUrl();
 
 export function build(config) {
   const app = fastify(config);
 
-  app.register(bearerAuthPlugin, { keys: API_KEYS });
+  if (API_KEYS.size) {
+    app.register(bearerAuthPlugin, { keys: API_KEYS });
+  }
 
   let items: any[] = [];
   app.get(API_PATH, async () => {

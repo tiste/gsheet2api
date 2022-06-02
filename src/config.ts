@@ -13,8 +13,8 @@ export class Config {
     return env.get("API_PATH").default("/").required().asString();
   }
 
-  apiKey(): string {
-    return env.get("API_KEY").required().asString();
+  apiKey(): string | undefined {
+    return env.get("API_KEY").asString();
   }
 }
 
