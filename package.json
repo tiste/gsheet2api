@@ -1,0 +1,39 @@
+{
+  "name": "gsheet2api",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Baptiste Lecocq <baptiste.lecocq@gmail.com> (https://tiste.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/bearer-auth": "7.0.1",
+    "axios": "0.27.2",
+    "csvtojson": "2.0.10",
+    "fastify": "3.29.0",
+    "lodash": "4.17.21"
+  },
+  "devDependencies": {
+    "@types/jest": "27.5.2",
+    "@types/lodash": "4.14.182",
+    "@types/node": "17.0.38",
+    "jest": "28.1.0",
+    "nodemon": "2.0.16",
+    "prettier": "2.6.2",
+    "ts-jest": "28.0.3",
+    "ts-node": "10.8.0",
+    "typescript": "4.7.2"
+  },
+  "scripts": {
+    "test": "jest",
+    "start:dev": "nodemon -w src src/index.ts",
+    "format": "prettier --write .",
+    "lint": "prettier --check ."
+  },
+  "jest": {
+    "coverageDirectory": "coverage",
+    "testEnvironment": "node",
+    "resetMocks": true,
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "declaration": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./public",
+    "baseUrl": "./",
+    "incremental": true,
+    "esModuleInterop": true,
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true
+  },
+  "include": ["api/**/*", "src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
