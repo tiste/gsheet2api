@@ -6,3 +6,4 @@ coverage
 *.js
 dist
 public
+.env
