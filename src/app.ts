@@ -14,19 +14,28 @@ export function build(config) {
   const app = fastify(config);
 
   app.register(corsPlugin);
-  if (API_KEYS.size) {
-    app.register(bearerAuthPlugin, { keys: API_KEYS });
-  }
 
-  let items: any[] = [];
-  app.get(API_PATH, async () => {
-    if (items.length === 0) {
-      const { data } = await axios.get(GSHEET_URL);
+  app.get("/health", async () => {
+    return { status: "ok" };
+  });
 
-      items = await parseCsv(data);
+  app.register((appWithAuth, opts, next) => {
+    if (API_KEYS.size) {
+      appWithAuth.register(bearerAuthPlugin, { keys: API_KEYS });
     }
 
-    return items;
+    let items: any[] = [];
+    appWithAuth.get(API_PATH, async () => {
+      if (items.length === 0) {
+        const { data } = await axios.get(GSHEET_URL);
+
+        items = await parseCsv(data);
+      }
+
+      return items;
+    });
+
+    next();
   });
 
   return app;
