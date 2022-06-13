@@ -1,4 +1,4 @@
-import fastify from "fastify";
+import fastify, { FastifyServerOptions } from "fastify";
 import axios from "axios";
 import bearerAuthPlugin from "@fastify/bearer-auth";
 import corsPlugin from "@fastify/cors";
@@ -10,7 +10,7 @@ const API_KEY = config.apiKey();
 const API_KEYS = new Set(API_KEY ? [API_KEY] : []);
 const GSHEET_URL = config.gsheetUrl();
 
-export function build(config) {
+export function build(config: FastifyServerOptions) {
   const app = fastify(config);
 
   app.register(corsPlugin);

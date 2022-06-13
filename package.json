@@ -26,6 +26,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:build": "tsc",
     "start:dev": "nodemon -w src src/index.ts",
     "format": "prettier --write .",
     "lint": "prettier --check ."
