@@ -20,11 +20,16 @@ export function build(config: FastifyServerOptions) {
   });
 
   app.register((appWithAuth, opts, next) => {
+    let items: any[] = [];
+
     if (API_KEYS.size) {
       appWithAuth.register(bearerAuthPlugin, { keys: API_KEYS });
     }
 
-    let items: any[] = [];
+    appWithAuth.get("/_refresh", () => {
+      items = [];
+    });
+
     appWithAuth.get(API_PATH, async () => {
       if (items.length === 0) {
         const { data } = await axios.get(GSHEET_URL);
