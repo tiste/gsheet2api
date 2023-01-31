@@ -22,7 +22,7 @@ Run `npm install` and `npm start` to launch API.
 
 ### Environment
 
-First, create the env file: `cp .env{.sample,}`
+First, create the env file: `cp .env{.sample,}` (or `op inject -i .env.sample -o .env`)
 
 You can now set the values in `.env` file.
 
