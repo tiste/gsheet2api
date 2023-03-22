@@ -28,6 +28,7 @@ export function build(config: FastifyServerOptions) {
 
     appWithAuth.get("/_refresh", () => {
       items = [];
+      return null;
     });
 
     appWithAuth.get(API_PATH, async () => {
