@@ -41,6 +41,22 @@ export function build(config: FastifyServerOptions) {
       return items;
     });
 
+    appWithAuth.get(`${API_PATH}/:id`, async (request, reply) => {
+      const { id } = request.params as { id: string };
+      if (items.length === 0) {
+        const { data } = await axios.get(GSHEET_URL);
+
+        items = await parseCsv(data);
+      }
+
+      const item = items.find((item) => item.id === id);
+      if (!item) {
+        reply.callNotFound();
+      } else {
+        return item;
+      }
+    });
+
     next();
   });
 
